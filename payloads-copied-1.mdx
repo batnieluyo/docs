@@ -1,0 +1,39 @@
+---
+title: "Mensaje con botón"
+---
+
+Esta referencia describe el evento y el contenido del webhook de la cuenta de WhatsApp Business para mensajes que contienen una respuesta rápida mediante un botón.
+
+## **Cuando ocurre**
+
+- Un usuario de WhatsApp toca un botón de respuesta rápida.
+
+## **Ejemplos**
+
+### **Mensaje de texto**
+
+Este ejemplo muestra un mensaje de respuesta rapida enviado por un usuario de WhatsApp.
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUFERjg0NDEzNDdFODU3MUMxMAA=",
+  "timestamp": 1750091045,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "button",
+  "button": {
+    "payload": "custom_value",
+    "text": "Unsubscribe"
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  }
+}
+```

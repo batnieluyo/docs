@@ -1,0 +1,41 @@
+---
+title: "Mensaje de texto"
+---
+
+Esta referencia describe el evento  y el contenido del webhook de la cuenta de WhatsApp Business para mensajes que contienen solo texto.
+
+## **Cuando ocurre**
+
+- Un usuario de WhatsApp envía un mensaje de texto a un número de teléfono comercial.
+- Un usuario de WhatsApp reenvía un mensaje de texto a un número de teléfono comercial.
+- Un usuario de WhatsApp usa el botón **Enviar mensaje a la empresa un catálogo, un mensaje de un solo producto o un mensaje de varios productos.**
+- Un usuario de WhatsApp envía un mensaje de texto a una empresa mediante un anuncio de clic a WhatsApp (un anuncio con un **destino de mensajes** de WhatsApp).
+
+## **Ejemplos**
+
+### **Mensaje de texto**
+
+Este ejemplo muestra un mensaje de texto enviado por un usuario de WhatsApp (el usuario simplemente escribió algo en el campo de chat y lo envía).
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "text",
+  "text": {
+    "body": "Can I get more info about this?"
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  },
+}
+```

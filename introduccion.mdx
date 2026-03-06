@@ -1,4 +1,21 @@
 ---
-title: 'Introducción'
+title: "Introducción"
 ---
 
+En este documento, se describen los webhooks y cómo se utilizan en la plataforma de WhatsApp Business.
+
+Los webhooks son solicitudes HTTP que envían peticiones en formato JSON a un servidor que tú designes. La plataforma de WhatsApp Business usa webhooks para informarte sobre los mensajes entrantes.
+
+## **Tamaño de la petición**
+
+Las peticiones al webhook pueden ser de hasta 3 MB.
+
+## **Error en la entrega de webhooks**
+
+Si enviamos una peticion a tu punto de conexión y tu servidor responde con un código de estado HTTP que no es 200, o si no podemos entregar el webhook por otro motivo, seguiremos intentando hasta 3 veces cada vez con menos frecuencia. Esto puede dar como resultado que se dupliquen las notificaciones de webhook.
+
+## **Solución de problemas**
+
+Si no recibes webhooks:
+
+- Asegúrate de que el punto de conexión acepte solicitudes.

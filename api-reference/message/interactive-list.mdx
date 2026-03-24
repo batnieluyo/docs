@@ -1,0 +1,136 @@
+---
+title: "Mensaje de lista"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+- Los mensajes de lista interactiva te permiten presentar a los usuarios de WhatsApp una lista de opciones para elegir.
+- Cuando un usuario toca el botón en el mensaje, se muestra un cuadro de diálogo con las opciones disponibles.
+- Luego, el usuario puede elegir una opción y su selección se enviará como respuesta.
+
+Los mensajes de lista interactiva admiten hasta 10 secciones, con hasta 10 filas para todas las secciones combinadas, y pueden incluir un encabezado y un pie de página opcionales.
+
+<img src="/images/lista_1.webp" width="400" />
+<img src="/images/lista_2.webp" width="400" />
+<img src="/images/lista_3.webp" width="300" />
+
+<ParamField body="to" type="integer" default={5219876543210} required>
+    Número de WhatsApp del destinatario en formato internacional, sin símbolos ni espacios.
+</ParamField>
+
+<ParamField body="type" type="string" required>
+    Tipo de mensaje a enviar. Para este endpoint debe ser `interactive`.
+</ParamField>
+
+<ParamField body="interactive" type="object" required>
+    The interactive message payload configuration.
+
+    <Expandable title="interactive properties" defaultOpen={true}>
+        <ParamField body="type" type="string" required default="list">
+            The specific type of interactive message you are sending.
+        </ParamField>
+
+        <ParamField body="header" type="object">
+            Optional header text displayed at the top of the message.
+            <Expandable title="header properties">
+                <ParamField body="type" type="string" required default="text">
+                    The header format.
+                </ParamField>
+                <ParamField body="text" type="string" required>
+                    The actual header text content.
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="body" type="object" required>
+            The main content of the message.
+            <Expandable title="body properties">
+                <ParamField body="text" type="string" required>
+                    The primary text content that appears above the list menu button.
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="footer" type="object">
+            Optional smaller text displayed beneath the main body.
+            <Expandable title="footer properties">
+                <ParamField body="text" type="string">
+                    The footer text content.
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="action" type="object" required>
+            The configuration for the list button and the menu items it opens.
+            <Expandable title="action properties">
+                <ParamField body="button" type="string" required>
+                    The text displayed on the button that opens the list (e.g., "View Options").
+                </ParamField>
+
+                <ParamField body="sections" type="array" required>
+                    An array defining the categories (sections) within your list.
+                    <Expandable title="section object">
+                        <ParamField body="title" type="string">
+                            The title of the section (required if you have more than one section).
+                        </ParamField>
+
+                        <ParamField body="rows" type="array" required>
+                            The selectable items within this section.
+                            <Expandable title="row object">
+                                <ParamField body="id" type="string" required>
+                                    The unique developer-defined ID for this row. This is returned to your webhook when the user selects it.
+                                </ParamField>
+                                <ParamField body="title" type="string" required>
+                                    The main text displayed for the row item.
+                                </ParamField>
+                                <ParamField body="description" type="string">
+                                    Optional sub-text displayed under the row's title.
+                                </ParamField>
+                            </Expandable>
+                        </ParamField>
+                    </Expandable>
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "interactive",
+  "interactive": {
+    "type": "list",
+    "header": {
+      "type": "text",
+      "text": "<MESSAGE_HEADER_TEXT>"
+    },
+    "body": {
+      "text": "<MESSAGE_BODY_TEXT>"
+    },
+    "footer": {
+      "text": "<MESSAGE_FOOTER_TEXT>"
+    },
+    "action": {
+      "button": "<BUTTON_TEXT>",
+      "sections": [
+        {
+          "title": "<SECTION_TITLE_TEXT>",
+          "rows": [
+            {
+              "id": "<ROW_ID>",
+              "title": "<ROW_TITLE_TEXT>",
+              "description": "<ROW_DESCRIPTION_TEXT>"
+            }
+            <!-- Additional rows would go here -->
+          ]
+        }
+        <!-- Additional sections would go here -->
+      ]
+    }
+  }
+}
+```

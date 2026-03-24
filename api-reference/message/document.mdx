@@ -1,0 +1,63 @@
+---
+title: "Mensajes con documento"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+# Tipos de documentos admitidos
+
+| Tipo de documento | Extensión | Tipo MIME | Tamaño máximo |
+| :--- | :--- | :--- | :--- |
+| Texto | .txt | text/plain | 100 MB |
+| Microsoft Excel | .xls | application/vnd.ms-excel | 100 MB |
+| Microsoft Excel | .xlsx | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet | 100 MB |
+| Microsoft Word | .doc | application/msword | 100 MB |
+| Microsoft Word | .docx | application/vnd.openxmlformats-officedocument.wordprocessingml.document | 100 MB |
+| Microsoft PowerPoint | .ppt | application/vnd.ms-powerpoint | 100 MB |
+| Microsoft PowerPoint | .pptx | application/vnd.openxmlformats-officedocument.presentationml.presentation | 100 MB |
+| PDF | .pdf | application/pdf | 100 MB |
+
+Solo los tipos de documentos mencionados anteriormente son oficialmente compatibles y se garantiza que se muestren correctamente en el cliente de WhatsApp. Se pueden enviar otros tipos de archivos a través de la API, pero no se admiten y es posible que no se manejen como se espera.
+
+---
+<ParamField body="to" type="integer" default={5219876543210} required>
+    Número de WhatsApp del destinatario en formato internacional, sin símbolos ni espacios.
+</ParamField>
+
+<ParamField body="type" type="string" required>
+    Tipo de mensaje a enviar. Para este endpoint debe ser `document`.
+</ParamField>
+
+<ParamField body="document" type="object" default='document' required>
+    Objeto con el contenido del mensaje.
+    <Expandable title="propiedades">
+        <ParamField body="id" type="integer">
+            - **Obligatorio si se usa contenido multimedia subido.** De lo contrario, se debe omitir.
+        </ParamField>
+        <ParamField body="link" type="string">
+            - **Obligatorio si se usa contenido multimedia alojado.** De lo contrario, se puede omitir.
+            - URL del recurso multimedia alojado en tu servidor público.
+        </ParamField>
+        <ParamField body="caption" type="string">
+            - **Opcional** - Texto del pie del activo multimedia.
+            - No debe superar los 1.024 caracteres.
+        </ParamField>
+        <ParamField body="filename" type="string">
+            - **Opcional** - Nombre de archivo del documento, con extensión. El cliente de WhatsApp usará un ícono de tipo de archivo adecuado según la extensión.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "document",
+  "document": {
+    "link": "https://www.luckyshrub.com/invoices/FmOzfD9cKf/lucky-shrub-invoice.pdf",
+    "caption": "Lucky Shrub Invoice",
+    "filename": "lucky-shrub-invoice.pdf"
+  }
+}
+```

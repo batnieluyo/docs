@@ -1,0 +1,86 @@
+---
+title: "Mensaje interactivo (CTA)"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+Mensajes con botón con URL de llamada a la acción interactivo
+
+Con estos mensajes de botón URL de llamada a la acción, puedes asignar cualquier URL a un botón, de modo que no tengas que incluir toda la URL en el cuerpo del mensaje.
+
+
+<ParamField body="to" type="integer" default={5219876543210} required>
+    Número de WhatsApp del destinatario en formato internacional, sin símbolos ni espacios.
+</ParamField>
+
+<ParamField body="type" type="string" required>
+    Tipo de mensaje a enviar. Para este endpoint debe ser `interactive`.
+</ParamField>
+
+<ParamField body="interactive" type="object" required>
+    The interactive message payload configuration.
+
+    <ParamField body="type" type="string" required default="interactive">
+        The overall type of message being sent.
+    </ParamField>
+
+    <Expandable title="interactive properties" defaultOpen={true}>
+        <ParamField body="type" type="string" required default="cta_url">
+            The specific type of interactive message you are sending.
+        </ParamField>
+
+        <ParamField body="body" type="object" required>
+            <Expandable title="properties">
+                <ParamField body="text" type="string" required>
+                    - *Obligatorio.* Texto del cuerpo. Las URL incluyen hipervínculos de forma automática.
+                    - No debe superar los 1.024 caracteres.
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="action" type="object" required>
+            The action configuration for the button.
+            <Expandable title="action properties">
+                <ParamField body="name" type="string" required default="cta_url">
+                    cta_url
+                </ParamField>
+
+                <ParamField body="parameters" type="object" required>
+                    <Expandable title="button parameters">
+                        <ParamField body="display_text" type="string" required>
+                            - **Obligatorio.**
+                            - Texto de la etiqueta del botón. Si se utilizan varios botones, el identificador debe ser único.
+                            - No debe superar los 20 caracteres.
+                        </ParamField>
+                        <ParamField body="url" type="string" required>
+                            - **Obligatorio.**
+                            - URL que se cargará en el navegador web predeterminado del dispositivo cuando el usuario de WhatsApp la toque.
+                        </ParamField>
+                    </Expandable>
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="footer" type="object">
+            Optional smaller text displayed beneath the main body and above the button.
+            <Expandable title="properties">
+                <ParamField body="text" type="string">
+                    The footer text content.
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "text",
+  "text": {
+    "body": "¡Hola mundo!"
+  }
+}
+```

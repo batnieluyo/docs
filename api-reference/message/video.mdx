@@ -1,0 +1,53 @@
+---
+title: "Mensaje con video"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+<ParamField body="to" type="string" required>
+    El número de teléfono del destinatario o su ID de WhatsApp.
+</ParamField>
+
+<ParamField body="type" type="string" required default="video">
+    El tipo de mensaje que se está enviando.
+</ParamField>
+
+<ParamField body="video" type="object" required>
+    La configuración del archivo multimedia del video.
+
+    <Expandable title="propiedades del video" defaultOpen={true}>
+        <ParamField body="id" type="string">
+            El ID del archivo de video previamente subido a los servidores de Meta. *(Recomendado para un envío más rápido)*.
+        </ParamField>
+
+        <ParamField body="link" type="string">
+            La URL pública donde está alojado tu video (por ejemplo, `https://tuservidor.com/video.mp4`).
+        </ParamField>
+
+        <ParamField body="caption" type="string">
+            Un texto opcional que se mostrará debajo del video (Máximo 1024 caracteres).
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "video",
+  "video": {
+    "link": "<MEDIA_URL>",
+    "caption": "<VIDEO_CAPTION_TEXT>"
+  }
+}
+```
+
+## Formatos de video admitidos
+
+Solo se admiten el códec de video H.264 y el códec de audio AAC. Un solo stream de audio o sin stream de audio.
+
+| Tipo de video | Extensión | Tipo MIME | Tamaño máximo |
+| :--- | :--- | :--- | :--- |
+| 3GPP | .3gp | video/3gpp | 16 MB |
+| Video MP4 | .mp4 | video/mp4 | 16 MB |

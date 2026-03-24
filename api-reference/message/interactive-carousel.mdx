@@ -1,0 +1,189 @@
+---
+title: "Mensaje con carrusel interactivo"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+Los mensajes por secuencia con contenido multimedia interactivo muestran un conjunto de tarjetas de contenido multimedia que se pueden desplazar horizontalmente. Cada tarjeta puede mostrar un encabezado de imagen o video, un texto y botones de respuesta rápida o un botón de URL.
+
+- Los mensajes deben incluir entre 2 y 10 tarjetas.
+- Se requiere el texto del cuerpo del mensaje principal.
+- No se admiten encabezados, pies ni componentes interactivos de mensajes principales.
+- Las tarjetas deben incluir un encabezado de imagen o video. No se admiten otros tipos de encabezados.
+- El texto del cuerpo de la tarjeta es opcional.
+- Las tarjetas deben incluir un botón de URL o uno o más botones de respuesta rápida. Los tipos y números de botones deben coincidir en todas las tarjetas (por ejemplo, si defines una tarjeta con dos botones de respuesta rápida, todas las tarjetas deben definir exactamente dos botones de respuesta rápida).
+
+<img src="/images/carousel_1.png" />
+<img src="/images/carousel_2.png" />
+
+<ParamField body="to" type="string" required>
+    The recipient's phone number or WhatsApp ID.
+</ParamField>
+
+<ParamField body="type" type="string" required default="interactive">
+    The overall type of message being sent.
+</ParamField>
+
+<ParamField body="interactive" type="object" required>
+    The interactive message payload configuration.
+
+    <Expandable title="interactive properties" defaultOpen={true}>
+        <ParamField body="type" type="string" required default="carousel">
+            The specific type of interactive message you are sending.
+        </ParamField>
+
+        <ParamField body="body" type="object" required>
+            The main content of the message.
+            <Expandable title="body properties">
+                <ParamField body="text" type="string" required>
+                    The primary text content that appears above the carousel.
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="action" type="object" required>
+            The configuration for the carousel cards.
+            <Expandable title="action properties">
+
+                <ParamField body="cards" type="array" required>
+                    An array defining the individual cards in the carousel (max 10).
+                    <Expandable title="card object">
+                        <ParamField body="card_index" type="integer">
+                            The zero-based index of the card.
+                        </ParamField>
+
+                        <ParamField body="type" type="string" required>
+                            The card component type.
+                        </ParamField>
+
+                        <ParamField body="header" type="object" required>
+                            The media asset displayed at the top of the card.
+                            <Expandable title="header properties">
+                                <ParamField body="type" type="string" required>
+                                    The media type (e.g., `image`, `video`).
+                                </ParamField>
+                                <ParamField body="[media_type]" type="object" required>
+                                    An object keyed by the media type defined above (e.g., `"image": { "link": "..." }`).
+                                    <Expandable title="media properties">
+                                        <ParamField body="link" type="string" required>
+                                            The hosted URL of the media asset.
+                                        </ParamField>
+                                    </Expandable>
+                                </ParamField>
+                            </Expandable>
+                        </ParamField>
+
+                        <ParamField body="body" type="object">
+                            Optional text displayed below the header media.
+                            <Expandable title="body properties">
+                                <ParamField body="text" type="string">
+                                    The card's main description text.
+                                </ParamField>
+                            </Expandable>
+                        </ParamField>
+
+                        <ParamField body="action" type="object" required>
+                            The button interactions attached to this specific card.
+                            <Expandable title="card action properties">
+
+                                {/* Documenting the URL Button option */}
+                                <ParamField body="name" type="string">
+                                    Required if using a URL button (set to `cta_url`).
+                                </ParamField>
+                                <ParamField body="parameters" type="object">
+                                    Configuration for the URL button.
+                                    <Expandable title="parameter properties">
+                                        <ParamField body="display_text" type="string">
+                                            The label text for the URL button.
+                                        </ParamField>
+                                        <ParamField body="url" type="string">
+                                            The destination URL.
+                                        </ParamField>
+                                    </Expandable>
+                                </ParamField>
+
+                                {/* Documenting the Quick Reply option */}
+                                <ParamField body="buttons" type="array">
+                                    Configuration if using one or more quick-reply buttons.
+                                    <Expandable title="button object">
+                                        <ParamField body="type" type="string" required default="quick_reply">
+                                            The type of button.
+                                        </ParamField>
+                                        <ParamField body="quick_reply" type="object" required>
+                                            The quick-reply configuration.
+                                            <Expandable title="quick reply properties">
+                                                <ParamField body="id" type="string" required>
+                                                    Unique developer-defined ID for the button payload.
+                                                </ParamField>
+                                                <ParamField body="title" type="string" required>
+                                                    The label displayed on the quick-reply button.
+                                                </ParamField>
+                                            </Expandable>
+                                        </ParamField>
+                                    </Expandable>
+                                </ParamField>
+
+                            </Expandable>
+                        </ParamField>
+                    </Expandable>
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "interactive",
+  "interactive": {
+    "type": "carousel",
+    "body": {
+      "text": "<MESSAGE_BODY_TEXT>"
+    },
+    "action": {
+      <!-- First card object -->
+      "cards": [
+        {
+          "card_index": <CARD_INDEX>,
+          "type": "cta_url",
+          "header": {
+            "type": "<HEADER_TYPE>",
+            "<HEADER_TYPE>": {
+              "link": "<MEDIA_ASSET_URL>"
+            }
+          },
+
+          <!-- Card body text is optional -->
+          "body": {
+            "text": "<CARD_BODY_TEXT>"
+          },
+
+          "action": {
+            <!-- Only if using a URL button -->
+            "name": "cta_url",
+            "parameters": {
+              "display_text": "<URL_BUTTON_LABEL>",
+              "url": "<URL_BUTTON_URL>"
+            }
+            <!-- Only if using one or more quick-reply buttons -->
+            "buttons": [
+              {
+                "type": "quick_reply",
+                "quick_reply": {
+                  "id": "<QUICK_REPLY_BUTTON_ID>",
+                  "title": "<QUICK_REPLY_BUTTON_LABEL>"
+                }
+              },
+              <!-- Additional quick-reply buttons would follow -->
+          }
+        },
+        <!-- Additional card objects would follow -->
+      ]
+    }
+  }
+}
+```

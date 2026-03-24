@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Heybot Documentación",
+  "name": "Heybot",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -56,27 +56,42 @@
         "tab": "API reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Documentación API",
             "pages": [
               "api-reference/introduction"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Envío de mensajes",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/message/text",
+              "api-reference/message/audio",
+              "api-reference/message/contact",
+              "api-reference/message/document",
+              "api-reference/message/image",
+              "api-reference/message/interactive-cta",
+              "api-reference/message/interactive-list",
+              "api-reference/message/interactive-carousel",
+              "api-reference/message/interactive-quick-reply",
+              "api-reference/message/location",
+              "api-reference/message/request-location",
+              "api-reference/message/reaction",
+              "api-reference/message/sticker",
+              "api-reference/message/video"
             ]
           }
         ]
       }
     ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+  "api": {
+    "mdx": {
+      "server": "https://whatsapp.heybot.cloud/",
+      "auth": {
+        "method": "bearer",
+        "name": "token"
+      }
+    }
   },
   "navbar": {
     "links": [

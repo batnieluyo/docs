@@ -1,0 +1,44 @@
+---
+title: "Mensaje con imagen"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+<ParamField body="to" type="integer" default={5219876543210} required>
+    Número de WhatsApp del destinatario en formato internacional, sin símbolos ni espacios.
+</ParamField>
+
+<ParamField body="type" type="string" required>
+    Tipo de mensaje a enviar. Para este endpoint debe ser `image`.
+</ParamField>
+
+<ParamField body="image" type="object" required>
+    Objeto con el contenido del mensaje.
+    <Expandable title="propiedades">
+        <ParamField body="id" type="integer">
+            - Identificador del activo multimedia subido.
+            - **Obligatorio si se usa contenido multimedia subido. De lo contrario, se debe omitir.**
+        </ParamField>
+        <ParamField body="link" type="string">
+            - URL del recurso multimedia alojado en tu servidor público.
+            - **Obligatorio si se usa contenido multimedia alojado. De lo contrario, se puede omitir.**
+        </ParamField>
+        <ParamField body="caption" type="string">
+            - Texto del pie de foto del activo multimedia.
+            - No debe superar los 1.024 caracteres.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "image",
+  "image": {
+    "link": "https://example.com/image.jpg",
+    "caption": "Mira esta increible foto!"
+  }
+}
+```

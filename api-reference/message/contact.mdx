@@ -1,0 +1,180 @@
+---
+title: "Mensajes de contactos"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+<ParamField body="type" type="string" required default="contacts">
+    The type of message being sent.
+</ParamField>
+
+<ParamField body="contacts" type="array" required>
+    An array containing the contact objects you want to send.
+
+    <Expandable title="contact object">
+        <ParamField body="name" type="object" required>
+            The name of the contact.
+            <Expandable title="properties">
+                <ParamField body="formatted_name" type="string" required>
+                    The full name as it normally appears.
+                </ParamField>
+                <ParamField body="first_name" type="string">
+                    The contact's first name.
+                </ParamField>
+                <ParamField body="last_name" type="string">
+                    The contact's last name.
+                </ParamField>
+                <ParamField body="middle_name" type="string">
+                    The contact's middle name.
+                </ParamField>
+                <ParamField body="suffix" type="string">
+                    Name suffix (e.g., Jr., Sr.).
+                </ParamField>
+                <ParamField body="prefix" type="string">
+                    Name prefix (e.g., Mr., Dr.).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="phones" type="array">
+            An array of phone numbers associated with the contact.
+            <Expandable title="phone object">
+                <ParamField body="phone" type="string">
+                    The actual phone number.
+                </ParamField>
+                <ParamField body="type" type="string">
+                    The type of phone number (e.g., WORK, HOME).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="emails" type="array">
+            An array of email addresses associated with the contact.
+            <Expandable title="email object">
+                <ParamField body="email" type="string">
+                    The email address.
+                </ParamField>
+                <ParamField body="type" type="string">
+                    The type of email (e.g., WORK, HOME).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="addresses" type="array">
+            An array of physical addresses.
+            <Expandable title="address object">
+                <ParamField body="street" type="string">
+                    Street number and name.
+                </ParamField>
+                <ParamField body="city" type="string">
+                    City name.
+                </ParamField>
+                <ParamField body="state" type="string">
+                    State or province code.
+                </ParamField>
+                <ParamField body="zip" type="string">
+                    ZIP or postal code.
+                </ParamField>
+                <ParamField body="country" type="string">
+                    Full country name.
+                </ParamField>
+                <ParamField body="country_code" type="string">
+                    Two-letter country code.
+                </ParamField>
+                <ParamField body="type" type="string">
+                    Address type (e.g., WORK, HOME).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="org" type="object">
+            Organization or company details.
+            <Expandable title="properties">
+                <ParamField body="company" type="string">
+                    Company or organization name.
+                </ParamField>
+                <ParamField body="department" type="string">
+                    Department name.
+                </ParamField>
+                <ParamField body="title" type="string">
+                    The contact's job title.
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="birthday" type="string">
+            The contact's birthday in YYYY-MM-DD format.
+        </ParamField>
+
+        <ParamField body="urls" type="array">
+            An array of web URLs.
+            <Expandable title="url object">
+                <ParamField body="url" type="string">
+                    The website URL.
+                </ParamField>
+                <ParamField body="type" type="string">
+                    The type of website (e.g., WORK, PORTFOLIO).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "contacts",
+  "contacts": [
+    {
+      "addresses": [
+        {
+          "street": "<STREET_NUMBER_AND_NAME>",
+          "city": "<CITY>",
+          "state": "<STATE_CODE>",
+          "zip": "<ZIP_CODE>",
+          "country": "<COUNTRY_NAME>",
+          "country_code": "<COUNTRY_CODE>",
+          "type": "<ADDRESS_TYPE>"
+        }
+        <!-- Additional addresses objects go here, if using -->
+      ],
+      "birthday": "<BIRTHDAY>",
+      "emails": [
+        {
+          "email": "<EMAIL_ADDRESS>",
+          "type": "<EMAIL_TYPE>"
+        }
+        <!-- Additional emails objects go here, if using -->
+      ],
+      "name": {
+        "formatted_name": "<FULL_NAME>",
+        "first_name": "<FIRST_NAME>",
+        "last_name": "<LAST_NAME>",
+        "middle_name": "<MIDDLE_NAME>",
+        "suffix": "<SUFFIX>",
+        "prefix": "<PREFIX>"
+      },
+      "org": {
+        "company": "<COMPANY_OR_ORG_NAME>",
+        "department": "<DEPARTMENT_NAME>",
+        "title": "<JOB_TITLE>"
+      },
+      "phones": [
+          "phone": "<PHONE_NUMBER>",
+          "type": "<PHONE_NUMBER_TYPE>"
+        }
+        <!-- Additional phones objects go here, if using -->
+      ],
+      "urls": [
+        {
+          "url": "<WEBSITE_URL>",
+          "type": "<WEBSITE_TYPE>"
+        }
+        <!-- Additional URLs go here, if using -->
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,52 @@
+---
+title: "Mensaje de reacción"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+Los mensajes de reacción son reacciones con emoji que puedes aplicar a los mensajes previos que recibes de usuarios de WhatsApp.
+
+<img src="/images/reaction.png" />
+
+## Limitaciones
+
+La secuencia de caracteres de escape Unicode del emoji, o el mismo emoji, para aplicar al mensaje del usuario.
+
+<ParamField body="to" type="string" required>
+    The recipient's phone number or WhatsApp ID.
+</ParamField>
+
+<ParamField body="type" type="string" required default="reaction">
+    The overall type of message being sent.
+</ParamField>
+
+<ParamField body="reaction" type="object" required>
+    The reaction payload configuration.
+
+    <Expandable title="reaction properties">
+        <ParamField body="message_id" type="string" required>
+            The WhatsApp message ID of the message you want to apply the emoji to (e.g., `wamid.HBg...`).
+
+            *Note: If the message is more than 30 days old, deleted, or is itself a reaction, the reaction will fail.*
+        </ParamField>
+
+        <ParamField body="emoji" type="string" required>
+            The emoji to apply to the user's message. You can pass the actual emoji (e.g., `😀`) or its Unicode escape sequence (e.g., `\uD83D\uDE00`).
+
+            *(To remove a previously sent reaction, send this request with an empty string `""`.)*
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "reaction",
+  "reaction": {
+    "message_id": "<WHATSAPP_MESSAGE_ID>",
+    "emoji": "<EMOJI>"
+  }
+}
+```

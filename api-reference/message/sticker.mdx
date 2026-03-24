@@ -1,0 +1,50 @@
+---
+title: "Mensaje con sticker"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+Los mensajes con stickers muestran imágenes con stickers animadas o estáticas en un mensaje de WhatsApp.
+
+
+<ParamField body="to" type="string" required>
+    El número de teléfono del destinatario o su ID de WhatsApp.
+</ParamField>
+
+<ParamField body="type" type="string" required default="sticker">
+    El tipo de mensaje que se está enviando.
+</ParamField>
+
+<ParamField body="sticker" type="object" required>
+    La configuración del archivo multimedia del sticker.
+
+    <Expandable title="propiedades del sticker" defaultOpen={true}>
+        <ParamField body="id" type="string">
+            El ID del archivo multimedia subido previamente a los servidores de Meta. *(Recomendado para un mejor rendimiento)*.
+        </ParamField>
+
+        <ParamField body="link" type="string">
+            La URL pública donde está alojado tu sticker (por ejemplo, `https://tuservidor.com/sticker.webp`).
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "sticker",
+  "sticker": {
+    "link": "<MEDIA_URL>"
+  }
+}
+```
+
+
+## Formatos de stickers admitidos
+
+| Tipo de sticker | Extensión | Tipo MIME | Tamaño máximo |
+| :--- | :--- | :--- | :--- |
+| Sticker animado | .webp | image/webp | 500 KB |
+| Sticker estático | .webp | image/webp | 100 KB |

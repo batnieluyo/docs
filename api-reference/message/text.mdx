@@ -1,0 +1,37 @@
+---
+title: "Mensaje de texto"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+<ParamField body="to" type="integer" default={5219876543210} required>
+    Número de WhatsApp del destinatario en formato internacional, sin símbolos ni espacios.
+</ParamField>
+
+<ParamField body="type" type="string" required>
+    Tipo de mensaje a enviar. Para este endpoint debe ser `text`.
+</ParamField>
+
+<ParamField body="text" type="object" required>
+    Objeto con el contenido del mensaje.
+    <Expandable title="propiedades">
+        <ParamField body="body" type="string">
+            Contenido del mensaje.
+        </ParamField>
+        <ParamField body="preview_url" type="boolean" default="false">
+            Habilita la vista previa de enlaces cuando el texto contiene una URL.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "text",
+  "text": {
+    "body": "¡Hola mundo!"
+  }
+}
+```

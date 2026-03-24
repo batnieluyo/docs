@@ -1,0 +1,57 @@
+---
+title: "Mensajes de audio"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+# Formatos de audio compatibles
+
+| Tipo de audio | Extensión | Tipo MIME | Tamaño máximo |
+|---|---|---|---|
+| AAC | .aac | audio/aac | 16 MB |
+| AMR | .amr | audio/amr | 16 MB |
+| MP3 | .mp3 | audio/mpeg | 16 MB |
+| Audio en formato MP4 | .m4a | audio/mp4 | 16 MB |
+| Audio en formato OGG | .ogg | audio/ogg (únicamente códec OPUS; no se admite audio/ogg base; solo entrada mono) | 16 MB |
+
+> Los errores más comunes asociados con los archivos de audio son por tipos MIME que no coinciden (el tipo MIME no coincide con el tipo de archivo indicado por el nombre del archivo) y la codificación no válida de los archivos OGG (solo se admite el códec OPUS). Si se produce un error al enviar un archivo multimedia, verifica que el tipo MIME del archivo de audio coincida con la extensión y que sea un tipo admitido. En el caso de los archivos OGG, usa el códec OPUS para la codificación.
+
+---
+<ParamField body="to" type="integer" default={5219876543210} required>
+    Número de WhatsApp del destinatario en formato internacional, sin símbolos ni espacios.
+</ParamField>
+
+<ParamField body="type" type="string" required>
+    Tipo de mensaje a enviar. Para este endpoint debe ser `audio`.
+</ParamField>
+
+<ParamField body="audio" type="object" default='audio' required>
+    Objeto con el contenido del mensaje.
+    <Expandable title="propiedades">
+        <ParamField body="id" type="integer">
+            - Identificador del activo multimedia subido.
+            - Obligatorio si se usa contenido multimedia subido. De lo contrario, se debe omitir.
+        </ParamField>
+        <ParamField body="link" type="string">
+            - URL del recurso multimedia alojado en tu servidor público.
+            - Obligatorio si se usa contenido multimedia alojado. De lo contrario, se puede omitir.
+        </ParamField>
+        <ParamField body="voice" type="boolean">
+            - Configurado como true para enviar un mensaje de voz.
+            - Los mensajes de voz deben ser archivos .ogg cifrados con el códec OPUS.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "image",
+  "image": {
+    "link": "https://example.com/image.jpg",
+    "caption": "Mira esta increible foto!"
+  }
+}
+```

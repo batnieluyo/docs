@@ -1,0 +1,149 @@
+---
+title: "Mensajes de botones de respuesta interactivos"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+Los mensajes de botones de respuesta interactivos te permiten enviar hasta tres respuestas predefinidas que los usuarios deben seleccionar.
+
+Para responder un mensaje, los usuarios pueden seleccionar uno de los botones predefinidos, lo que activa un webhook de mensajes que describe su selección.
+
+<img src="/images/quick_1.png" width="400" />
+<img src="/images/quick_2.png" width="300" />
+
+<ParamField body="to" type="string" required>
+    The recipient's phone number or WhatsApp ID.
+</ParamField>
+
+<ParamField body="type" type="string" required default="interactive">
+    The overall type of message being sent.
+</ParamField>
+
+<ParamField body="interactive" type="object" required>
+    The interactive message payload configuration.
+
+    <Expandable title="interactive properties" defaultOpen={true}>
+        <ParamField body="type" type="string" required default="button">
+            The specific type of interactive message you are sending.
+        </ParamField>
+
+        <ParamField body="header" type="object">
+            Optional header content. Supports text or media (document, image, video).
+            <Expandable title="header properties">
+                <ParamField body="type" type="string" required>
+                    The header type (e.g., `text`, `image`, `document`, `video`).
+                </ParamField>
+
+                {/* If type is text */}
+                <ParamField body="text" type="string">
+                    The text content (required if header type is `text`).
+                </ParamField>
+
+                {/* If type is media */}
+                <ParamField body="[media_type]" type="object">
+                    An object keyed by the media type (e.g., `"image": { "id": "..." }`).
+                    <Expandable title="media properties">
+                        <ParamField body="id" type="string">
+                            The ID of the uploaded media asset (recommended).
+                        </ParamField>
+                        <ParamField body="link" type="string">
+                            The hosted URL of the media asset.
+                        </ParamField>
+                    </Expandable>
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="body" type="object" required>
+            The main content of the message.
+            <Expandable title="body properties">
+                <ParamField body="text" type="string" required>
+                    The primary text content. URLs are automatically hyperlinked (Maximum 1024 characters).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="footer" type="object">
+            Optional smaller text displayed beneath the main body.
+            <Expandable title="footer properties">
+                <ParamField body="text" type="string">
+                    The footer text content (Maximum 60 characters).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="action" type="object" required>
+            The configuration for the reply buttons.
+            <Expandable title="action properties">
+                <ParamField body="buttons" type="array" required>
+                    An array defining the buttons attached to the message (maximum of 3 buttons).
+                    <Expandable title="button object">
+                        <ParamField body="type" type="string" required default="reply">
+                            The type of button.
+                        </ParamField>
+                        <ParamField body="reply" type="object" required>
+                            The configuration for the reply button.
+                            <Expandable title="reply properties">
+                                <ParamField body="id" type="string" required>
+                                    A unique identifier for the button. This is returned via webhook when a user taps it (Maximum 256 characters).
+                                </ParamField>
+                                <ParamField body="title" type="string" required>
+                                    The label text displayed on the button. Must be unique across all buttons (Maximum 20 characters).
+                                </ParamField>
+                            </Expandable>
+                        </ParamField>
+                    </Expandable>
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+MESSAGE_HEADER Opcional
+```json
+{
+  "type": "image|document|video",
+  "image": {
+      "link": "https://www.luckyshrub.com/media/workshop-banner.png"
+    }
+}
+```
+
+```json
+{
+  "type": "text",
+  "text": "Workshop Details"
+}
+```
+---
+```json
+{
+  "to": 5219876543210,
+  "type": "interactive",
+  "interactive": {
+    "type": "button",
+    "header": {<MESSAGE_HEADER>},
+    "body": {
+      "text": "<BODY_TEXT>"
+    },
+    "footer": {
+      "text": "<FOOTER_TEXT>"
+    },
+    "action": {
+      "buttons": [
+        {
+          "type": "reply",
+          "reply": {
+            "id": "<BUTTON_ID>",
+            "title": "<BUTTON_LABEL_TEXT>"
+          }
+        }
+        <!-- Additional buttons would go here (maximum 3) -->
+      ]
+    }
+  }
+}
+```

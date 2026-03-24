@@ -1,0 +1,52 @@
+---
+title: "Mensaje de ubicación"
+api: "POST /api/v2/message"
+playground: "simple"
+---
+
+Los mensajes de ubicación te permiten enviar las coordenadas de latitud y longitud de una ubicación a un usuario de WhatsApp.
+
+<ParamField body="to" type="string" required>
+    The recipient's phone number or WhatsApp ID.
+</ParamField>
+
+<ParamField body="type" type="string" required default="location">
+    The overall type of message being sent.
+</ParamField>
+
+<ParamField body="location" type="object" required>
+    The location payload configuration.
+
+    <Expandable title="location properties" defaultOpen={true}>
+        <ParamField body="latitude" type="string" required>
+            The location's latitude in decimal degrees (e.g., `"37.44216251868683"`).
+        </ParamField>
+
+        <ParamField body="longitude" type="string" required>
+            The location's longitude in decimal degrees (e.g., `"-122.16153582049394"`).
+        </ParamField>
+
+        <ParamField body="name" type="string">
+            **Opcional** - The name of the location or business (e.g., `"Philz Coffee"`).
+        </ParamField>
+
+        <ParamField body="address" type="string">
+            **Opcional** - The formatted physical address of the location (e.g., `"101 Forest Ave, Palo Alto, CA 94301"`).
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+## Ejemplo
+
+```json
+{
+  "to": 5219876543210,
+  "type": "location",
+  "location": {
+    "latitude": "<LOCATION_LATITUDE>",
+    "longitude": "<LOCATION_LONGITUDE>",
+    "name": "<LOCATION_NAME>",
+    "address": "<LOCATION_ADDRESS>"
+  }
+}
+```

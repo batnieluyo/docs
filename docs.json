@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Heybot Documentación",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -12,14 +12,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "icon": "book-open-cover",
-          "href": "https://mintlify.com/docs"
+          "anchor": "Heybot",
+          "icon": "rocket",
+          "href": "https://heybot.cloud"
         },
         {
-          "anchor": "Blog",
-          "icon": "newspaper",
-          "href": "https://mintlify.com/blog"
+          "anchor": "Dashboard",
+          "icon": "home",
+          "href": "https://heybot.cloud/dashboard"
         }
       ]
     },
@@ -30,41 +30,24 @@
           {
             "group": "Getting started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "getting-started/index"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Webhook",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          },
-          {
-            "group": "Mensajes entrantes",
-            "pages": [
-              "introduccion",
-              "payloads",
-              "payloads-copied-1"
+              "webhook/introduccion",
+              "webhook/text",
+              "webhook/audio",
+              "webhook/buttons",
+              "webhook/contact",
+              "webhook/document",
+              "webhook/image",
+              "webhook/interactive",
+              "webhook/location",
+              "webhook/reaction",
+              "webhook/sticker",
+              "webhook/video"
             ]
           }
         ]

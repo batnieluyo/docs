@@ -1,0 +1,39 @@
+---
+title: "Mensajes de ubicación"
+---
+
+En esta referencia, se describen los eventos de activación y el contenido de la carga útil del webhook messages de la cuenta de WhatsApp Business para mensajes que contienen información de ubicación.
+
+## **Cuando ocurre**
+
+- Un usuario de WhatsApp envía un mensaje de ubicación a un negocio.
+- Un usuario de WhatsApp envía una ubicación a un negocio a través de un anuncio de clic a WhatsApp.
+
+## **Ejemplos**
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "location",
+  "location": {
+    "address": "<ADDRESS>",
+    "latitude": "<LATITUDE>",
+    "longitude": "<LONGITUDE>",
+    "name": "<LOCATION_NAME | OPTIONAL>",
+    "url": "<LOCATION_URL | OPTIONAL>"
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  },
+}
+```

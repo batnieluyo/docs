@@ -1,0 +1,37 @@
+---
+title: "Mensajes de contactos"
+---
+
+Esta referencia describe los eventos de activación y el contenido de la carga del webhook messages de la cuenta de WhatsApp Business para mensajes que contienen un contacto o más.
+
+## **Cuando ocurre**
+
+- Un usuario de WhatsApp envía uno o más contactos a un negocio.
+- Un usuario de WhatsApp envía uno o más contactos a un negocio a través de un anuncio de clic a WhatsApp.
+
+> Ten en cuenta que se pueden omitir muchas propiedades del objeto de contacto si el usuario de WhatsApp decide no compartirlas o si su dispositivo no permite que se compartan.
+
+## **Ejemplos**
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "text",
+  "text": {
+    "body": "Can I get more info about this?"
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  },
+}
+```

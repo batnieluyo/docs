@@ -1,0 +1,38 @@
+---
+title: "Mensajes con audio"
+---
+
+Esta referencia describe el evento  y el contenido del webhook de la cuenta de WhatsApp Business para mensajes que contienen una grabación de audio.
+
+## **Cuando ocurre**
+
+- Un usuario de WhatsApp envía una grabación de audio de WhatsApp o un archivo de audio a un negocio.
+- Un usuario de WhatsApp envía una grabación de audio de WhatsApp o un archivo de audio a un negocio mediante un anuncio de clic a WhatsApp.
+
+## **Ejemplo**
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "audio",
+  "audio": {
+    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+    "url": "<MEDIA_ASSET_URL>",
+    "voice": "<IS_VOICE_RECORDING?><boolean>"
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  },
+}
+```

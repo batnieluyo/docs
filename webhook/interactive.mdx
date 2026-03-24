@@ -1,0 +1,76 @@
+---
+title: "Mensajes interactivos"
+---
+
+En esta referencia, se describen los eventos de activación y el contenido de la carga útil del webhook messages de la cuenta de WhatsApp Business para las respuestas a mensajes interactivos.
+
+## **Cuando ocurre**
+
+- Un usuario de WhatsApp toca una fila de un mensaje de lista interactivo.
+- Un usuario de WhatsApp toca un botón en un mensaje con botón de respuesta interactiva.
+
+## **Ejemplos**
+
+**Respuesta a mensaje de lista interactivo.**
+
+<img width="400" src="/images/interactive_list_options.webp" />
+
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "interactive",
+  "interactive": {
+    "type": "list_reply",
+    "list_reply": {
+        "id": "<ROW_ID>",
+        "title": "<ROW_TITLE>",
+        "description": "<ROW_DESCRIPTION>"
+    }
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  }
+}
+```
+
+**Respuesta a mensaje interactivo**
+
+<img width="300" src="/images/quick_reply_option.webp" />
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "interactive",
+  "interactive": {
+    "type": "button_reply",
+    "button_reply": {
+        "id": "change",
+        "title": "Change"
+    }
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  }
+}
+```

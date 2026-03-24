@@ -1,0 +1,106 @@
+---
+title: "Mensajes de imagen"
+---
+
+En esta referencia, se describen los eventos de activación y el contenido de la carga útil del webhook messages de la cuenta de WhatsApp Business para mensajes que contienen una imagen.
+
+## **Cuando ocurre**
+
+- Un usuario de WhatsApp envía una imagen.
+- Un usuario de WhatsApp reenvía un mensaje con imagen.
+- Un usuario de WhatsApp reenvía un mensaje con botón de respuesta interactivo.
+- Un usuario de WhatsApp envía una imagen a un negocio a través de un anuncio de clic a WhatsApp.
+
+## **Ejemplos**
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "image",
+  "image": {
+    "caption": "<MEDIA_ASSET_CAPTION>",
+    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+    "url": "<MEDIA_ASSET_URL>"
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  },
+}
+```
+
+**Si ha sido reenviado 5 veces o menos**
+
+> Se agrega un nuevo campo `context` con la propiedad `forwarded`
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "image",
+  "image": {
+    "caption": "<MEDIA_ASSET_CAPTION>",
+    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+    "url": "<MEDIA_ASSET_URL>"
+  },
+  "context": {
+    "forwarded": true,
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  },
+}
+```
+
+**Si ha sido reenviado más de 5 veces**
+
+> Se agrega un nuevo campo `context` con la propiedad `frequently_forwarded`
+
+```json
+{
+  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+  "timestamp": 1750275992,
+  "channel": "whatsapp",
+  "event": "message",
+  "type": "image",
+  "image": {
+    "caption": "<MEDIA_ASSET_CAPTION>",
+    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+    "url": "<MEDIA_ASSET_URL>"
+  },
+  "context": {
+    "frequently_forwarded": true
+  },
+  "from": {
+    "id": "16505551234",
+    "display_name": "Sheena Nelson",
+    "phone_number": "16505551234",
+    "username": null
+  },
+  "to": {
+    "phone_number": "15550783881",
+    "phone_number_id": "106540352242922"
+  }
+}
+```

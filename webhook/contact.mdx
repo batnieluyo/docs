@@ -19,10 +19,6 @@ Esta referencia describe los eventos de activación y el contenido de la carga d
   "timestamp": 1750275992,
   "channel": "whatsapp",
   "event": "message",
-  "type": "text",
-  "text": {
-    "body": "Can I get more info about this?"
-  },
   "from": {
     "id": "16505551234",
     "display_name": "Sheena Nelson",
@@ -33,5 +29,54 @@ Esta referencia describe los eventos de activación y el contenido de la carga d
     "phone_number": "15550783881",
     "phone_number_id": "106540352242922"
   },
+  "type": "contacts",
+  "contacts": [
+    {
+      "addresses": [
+        {
+          "city": "<CONTACT_CITY>",
+          "country": "<CONTACT_COUNTRY>",
+          "country_code": "<CONTACT_COUNTRY_CODE>",
+          "state": "<CONTACT_STATE>",
+          "street": "<CONTACT_STREET>",
+          "type": "<CONTACT_ADDRESS_TYPE>",
+          "zip": "<CONTACT_ZIP>"
+        }
+      ],
+      "birthday": "<CONTACT_BIRTHDAY>",
+      "emails": [
+        {
+          "email": "<CONTACT_EMAIL>",
+          "type": "<CONTACT_EMAIL_TYPE>"
+        }
+      ],
+      "name": {
+        "formatted_name": "<CONTACT_FORMATTED_NAME>",
+        "first_name": "<CONTACT_FIRST_NAME>",
+        "last_name": "<CONTACT_LAST_NAME>",
+        "middle_name": "<CONTACT_MIDDLE_NAME>",
+        "suffix": "<CONTACT_NAME_SUFFIX>",
+        "prefix": "<CONTACT_NAME_PREFIX>"
+      },
+      "org": {
+        "company": "<CONTACT_ORG_COMPANY>",
+        "department": "<CONTACT_ORG_DEPARTMENT>",
+        "title": "<CONTACT_ORG_TITLE>"
+      },
+      "phones": [
+        {
+          "phone": "<CONTACT_PHONE>",
+          "wa_id": "<CONTACT_WHATSAPP_PHONE_NUMBER>",
+          "type": "<CONTACT_PHONE_TYPE>"
+        }
+      ],
+      "urls": [
+        {
+          "url": "<CONTACT_URL>",
+          "type": "<CONTACT_URL_TYPE>"
+        }
+      ]
+    }
+  ]
 }
 ```

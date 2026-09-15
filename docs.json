@@ -93,7 +93,7 @@
   },
   "api": {
     "mdx": {
-      "server": "https://whatsapp.heybot.cloud/",
+      "server": "https://api.heybot.cloud/",
       "auth": {
         "method": "bearer",
         "name": "token"

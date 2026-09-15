@@ -10,14 +10,14 @@ Esta guía te ayudará a utilizar la API de WhatsApp de manera rápida y sencill
 El url base del servidor es
 
 ```
-https://whatsapp.heybot.cloud
+https://api.heybot.cloud
 ```
 
 
 | Acción             | Recurso            | Method |
 | ------------------ | ------------------ | ------ |
-| Enviar mensaje     | `/api/v2/message`  | `POST` |
-| Enviar plantilla   | `/api/v2/template` | `POST` |
+| Enviar mensaje     | `/v1/message`  | `POST` |
+| Enviar plantilla   | `/v1/template` | `POST` |
 
 ## Autenticacion y autorización
 
@@ -38,7 +38,7 @@ Todos los puntos finales de la API se autentican mediante Bearer tokens.
 import axios from 'axios';
 
 const response = await axios.post(
-  'https://whatsapp.heybot.cloud/api/v2/message',
+  'https://api.heybot.cloud/v1/message',
   {
     to: '+1234567890',
     type: 'text',

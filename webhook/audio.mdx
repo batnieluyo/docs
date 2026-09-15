@@ -4,6 +4,8 @@ title: "Mensajes con audio"
 
 Esta referencia describe el evento  y el contenido del webhook de la cuenta de WhatsApp Business para mensajes que contienen una grabación de audio.
 
+El cuerpo del evento contiene directamente el objeto `value` de Meta (`entry[].changes[].value`), como se explica en la [introducción](/webhook/introduccion).
+
 ## **Cuando ocurre**
 
 - Un usuario de WhatsApp envía una grabación de audio de WhatsApp o un archivo de audio a un negocio.
@@ -13,26 +15,33 @@ Esta referencia describe el evento  y el contenido del webhook de la cuenta de W
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "audio",
-  "audio": {
-    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
-    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
-    "url": "<MEDIA_ASSET_URL>",
-    "voice": "<IS_VOICE_RECORDING?><boolean>"
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
   },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "audio",
+      "audio": {
+        "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+        "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+        "voice": true,
+        "id": "<MEDIA_ID>",
+        "url": "<MEDIA_URL>"
+      }
+    }
+  ]
 }
 ```

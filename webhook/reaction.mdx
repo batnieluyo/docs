@@ -4,7 +4,10 @@ title: "Mensajes de reacción"
 
 En esta referencia, se describen los eventos de activación y el contenido de la carga útil del webhook messages de la cuenta de WhatsApp Business para mensajes que contienen una reacción a un mensaje previo enviado.
 
-> Nota: Cuando un usuario final elimina un emoji de reacción, se enviará un webhook sin el campo "emoji".
+> Nota: Cuando un usuario final elimina un emoji de reacción, el campo `messages[].reaction.emoji` contiene una cadena vacía (`""`).
+
+El cuerpo del evento contiene directamente el objeto `value` de Meta (`entry[].changes[].value`), como se explica en la [introducción](/webhook/introduccion).
+
 ## **Cuando ocurre**
 
 - Un usuario de WhatsApp reacciona a un mensaje previo enviado en los últimos 30 días.
@@ -14,50 +17,62 @@ En esta referencia, se describen los eventos de activación y el contenido de la
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "reaction",
-  "reaction": {
-    "message_id": "<WHATSAPP_MESSAGE_ID>>",
-    "emoji": "<EMOJI_UNICODE>"
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
   },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "reaction",
+      "reaction": {
+        "message_id": "<WHATSAPP_MESSAGE_ID>",
+        "emoji": "<EMOJI_UNICODE>"
+      }
+    }
+  ]
 }
 ```
 
-**Cuando se elimina una reación**
+**Cuando se elimina una reacción**
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "reaction",
-  "reaction": {
-    "message_id": "<WHATSAPP_MESSAGE_ID>>",
-    "emoji": ""
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
-  }
+  },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "reaction",
+      "reaction": {
+        "message_id": "<WHATSAPP_MESSAGE_ID>",
+        "emoji": ""
+      }
+    }
+  ]
 }
 ```

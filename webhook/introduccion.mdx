@@ -6,6 +6,23 @@ En este documento, se describen los webhooks y cómo se utilizan en la plataform
 
 Los webhooks son solicitudes HTTP que envían peticiones en formato JSON a un servidor que tú designes. La plataforma de WhatsApp Business usa webhooks para informarte sobre los mensajes entrantes.
 
+## **Payload de entrada de WhatsApp Business API**
+
+El cuerpo del webhook contiene directamente el objeto `value` original que provee Meta en `entry[].changes[].value`. Se conservan sus campos y estructura; no se incluyen los envoltorios `object`, `entry`, `changes`, `field` ni una propiedad adicional `value`.
+
+En los eventos de mensajes entrantes, encontrarás:
+
+- `messaging_product`: `"whatsapp"`.
+- `metadata`: número de teléfono del negocio (`display_phone_number`) y su identificador (`phone_number_id`).
+- `contacts`: datos del remitente, como `profile.name` y `wa_id`.
+- `messages`: arreglo con los mensajes recibidos. Cada mensaje contiene `from`, `id`, `timestamp` como cadena, `type` y el objeto correspondiente a ese tipo.
+
+Los ejemplos de cada tipo de mensaje muestran este cuerpo completo. Los campos opcionales aparecen según el mensaje recibido: por ejemplo, `context` para respuestas o reenvíos y `referral` para mensajes originados desde anuncios. Estos campos se conservan dentro del mensaje tal como los entrega Meta.
+
+Los mensajes multimedia incluyen el identificador del archivo en `messages[].<tipo>.id`, que permite consultar el recurso mediante la API de Meta. Los valores entre `<` y `>` en los ejemplos son marcadores de posición.
+
+Referencia: [WhatsApp Cloud API de Meta](https://www.postman.com/meta/whatsapp-business-platform/documentation/wlk6lh4/whatsapp-cloud-api).
+
 ## **Tamaño de la petición**
 
 Las peticiones al webhook pueden ser de hasta 3MB.

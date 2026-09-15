@@ -4,6 +4,8 @@ title: "Mensaje de video"
 
 Esta referencia describe los eventos de activación y el contenido de la carga del webhook messages de la cuenta de WhatsApp Business para mensajes que contienen un video.
 
+El cuerpo del evento contiene directamente el objeto `value` de Meta (`entry[].changes[].value`), como se explica en la [introducción](/webhook/introduccion).
+
 ## **Cuando ocurre**
 
 - Un usuario de WhatsApp envía un video.
@@ -13,96 +15,116 @@ Esta referencia describe los eventos de activación y el contenido de la carga d
 
 ## **Ejemplos**
 
-### **Mensaje de texto**
+### **Mensaje con video**
 
-Este ejemplo muestra un mensaje de texto enviado por un usuario de WhatsApp (el usuario simplemente escribió algo en el campo de chat y lo envía).
+Este ejemplo muestra un video enviado por un usuario de WhatsApp.
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "video",
-  "video": {
-    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
-    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
-    "url": "<MEDIA_ASSET_URL>"
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
   },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "video",
+      "video": {
+        "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+        "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+        "id": "<MEDIA_ID>",
+        "url": "<MEDIA_URL>"
+      }
+    }
+  ]
 }
 ```
 
 
 **Si ha sido reenviado 5 veces o menos**
 
-> Se agrega un nuevo campo `context` con la propiedad `forwarded`
+> Se agrega al mensaje (`messages[]`) un campo `context` con la propiedad `forwarded`
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "video",
-  "video": {
-    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
-    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
-    "url": "<MEDIA_ASSET_URL>"
-  },
-  "context": {
-    "forwarded": true,
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
   },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "video",
+      "video": {
+        "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+        "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+        "id": "<MEDIA_ID>",
+        "url": "<MEDIA_URL>"
+      },
+      "context": {
+        "forwarded": true
+      }
+    }
+  ]
 }
 ```
 
 **Si ha sido reenviado más de 5 veces**
 
-> Se agrega un nuevo campo `context` con la propiedad `frequently_forwarded`
+> Se agrega al mensaje (`messages[]`) un campo `context` con la propiedad `frequently_forwarded`
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "video",
-  "video": {
-    "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
-    "sha256": "<MEDIA_ASSET_SHA256_HASH>",
-    "url": "<MEDIA_ASSET_URL>"
-  },
-  "context": {
-    "frequently_forwarded": true
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
-  }
+  },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "video",
+      "video": {
+        "mime_type": "<MEDIA_ASSET_MIME_TYPE>",
+        "sha256": "<MEDIA_ASSET_SHA256_HASH>",
+        "id": "<MEDIA_ID>"
+      },
+      "context": {
+        "frequently_forwarded": true
+      }
+    }
+  ]
 }
 ```

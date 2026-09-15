@@ -4,6 +4,8 @@ title: "Mensajes interactivos"
 
 En esta referencia, se describen los eventos de activación y el contenido de la carga útil del webhook messages de la cuenta de WhatsApp Business para las respuestas a mensajes interactivos.
 
+El cuerpo del evento contiene directamente el objeto `value` de Meta (`entry[].changes[].value`), como se explica en la [introducción](/webhook/introduccion).
+
 ## **Cuando ocurre**
 
 - Un usuario de WhatsApp toca una fila de un mensaje de lista interactivo.
@@ -18,29 +20,39 @@ En esta referencia, se describen los eventos de activación y el contenido de la
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "interactive",
-  "interactive": {
-    "type": "list_reply",
-    "list_reply": {
-        "id": "<ROW_ID>",
-        "title": "<ROW_TITLE>",
-        "description": "<ROW_DESCRIPTION>"
-    }
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
-  }
+  },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "interactive",
+      "interactive": {
+        "type": "list_reply",
+        "list_reply": {
+          "id": "<ROW_ID>",
+          "title": "<ROW_TITLE>",
+          "description": "<ROW_DESCRIPTION>"
+        }
+      },
+      "context": {
+        "from": "15550783881",
+        "id": "<ORIGINAL_MESSAGE_ID>"
+      }
+    }
+  ]
 }
 ```
 
@@ -50,27 +62,37 @@ En esta referencia, se describen los eventos de activación y el contenido de la
 
 ```json
 {
-  "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
-  "timestamp": 1750275992,
-  "channel": "whatsapp",
-  "event": "message",
-  "type": "interactive",
-  "interactive": {
-    "type": "button_reply",
-    "button_reply": {
-        "id": "change",
-        "title": "Change"
-    }
-  },
-  "from": {
-    "id": "16505551234",
-    "display_name": "Sheena Nelson",
-    "phone_number": "16505551234",
-    "username": null
-  },
-  "to": {
-    "phone_number": "15550783881",
+  "messaging_product": "whatsapp",
+  "metadata": {
+    "display_phone_number": "15550783881",
     "phone_number_id": "106540352242922"
-  }
+  },
+  "contacts": [
+    {
+      "profile": {
+        "name": "Sheena Nelson"
+      },
+      "wa_id": "16505551234"
+    }
+  ],
+  "messages": [
+    {
+      "from": "16505551234",
+      "id": "wamid.HBgLMTY1MDM4Nzk0MzkVAgASGBQzQUQ0N0VFMDA2MTQ0RkJFNkNDNAA=",
+      "timestamp": "1750275992",
+      "type": "interactive",
+      "interactive": {
+        "type": "button_reply",
+        "button_reply": {
+          "id": "change",
+          "title": "Change"
+        }
+      },
+      "context": {
+        "from": "15550783881",
+        "id": "<ORIGINAL_MESSAGE_ID>"
+      }
+    }
+  ]
 }
 ```

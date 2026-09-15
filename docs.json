@@ -53,7 +53,8 @@
           {
             "group": "Heybot-cli",
             "pages": [
-              "heybot-cli-resume"
+              "heybot-cli-resume",
+              "install-heybot-cli"
             ]
           }
         ]

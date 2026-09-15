@@ -1,0 +1,62 @@
+---
+title: "Instalar Heybot CLI"
+---
+
+Esta referencia documenta  los comandos, parámetros ya rgumentos disponibles en la interfaz de línea de comandos de Heybot.
+
+El CLI de heybot te ayuda a crear, probar y gestionar tu integración de WhatsApp Business API directamente desde la terminal.
+
+Con Heybot CLI, puedes:
+
+- Escuchar los mensajes entrantes de un numero de teléfono conectado WhatsApp Business API.
+- Escuchar las actualizaciones del estado de un mensaje enviado de un numero de teléfono conectado WhatsApp Business API.
+- Redirigir los eventos a un url de desarrollo local 
+
+## **Mac / Linux**
+
+Abre tu terminal y ejecuta el siguiente comando
+
+```shellscript
+curl -fsSL https://cli.heybot.cloud/install.sh
+```
+
+## **Windows**
+
+Puedes instalar Heybot CLI automáticamente desde PowerShell o descargar el ejecutable de forma manual.
+
+### **Instalación con PowerShell**
+
+Abre **PowerShell** y ejecuta:
+
+```shellscript
+irm https://cli.heybot.cloud/install.ps1 | iex
+```
+
+El instalador:
+
+- Detectará automáticamente la arquitectura de tu equipo.
+- Descargará la versión compatible de Heybot CLI.
+- Instalará `heybot.exe` en tu usuario.
+- Agregará Heybot CLI al `PATH`.
+
+## Verifica la instalación
+
+Abre una nueva terminal y verifica la instalación:
+
+```shellscript
+heybot inspire
+```
+
+## Comandos
+
+- Visualiza los eventos en la consola de comandos
+
+```shellscript
+heybot listen heybot_api_key
+```
+
+- Redirige los eventos como webhooks a la url de tu desarrollo en local; Los webhooks son peticiones POST.
+
+```shellscript
+heybot listen your_heybot_api_key --forward-to=http://localhost:8080/webhook/heybot/whatsapp
+```

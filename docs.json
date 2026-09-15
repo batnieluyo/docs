@@ -49,6 +49,12 @@
               "webhook/sticker",
               "webhook/video"
             ]
+          },
+          {
+            "group": "Heybot-cli",
+            "pages": [
+              "untitled-page"
+            ]
           }
         ]
       },
